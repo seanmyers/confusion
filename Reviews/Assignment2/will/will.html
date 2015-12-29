@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="confusionApp">
+
+<head>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head
+         content must come *after* these tags -->
+    <title>Ristorante Con Fusion: Menu</title>
+        <!-- Bootstrap -->
+<!-- build:css styles/main.css -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-social.css" rel="stylesheet">
+    <link href="styles/mystyles.css" rel="stylesheet">
+<!-- endbuild -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row row-content" ng-controller="DishDetailController">
+            <div class="col-xs-12">
+                <div class="media-left media-middle">
+                        <a href="#">
+                        <img class="media-object img-thumbnail"
+                         ng-src={{dish.image}} alt="Uthappizza">
+                        </a>
+                 </div>
+				<div class="media-body">
+                        <h2 class="media-heading">{{dish.name}}
+                         <span class="label label-danger">{{dish.label}}</span>
+                         <span class="badge">{{dish.price | currency}}</span></h2>
+                <p>{{dish.description}}</p>
+            </div>
+            <div class="col-xs-9 col-xs-offset-1">
+                <p class="media-heading" ><b style="font-size: 1.5em;"> Customer Comments </b>    Sort By: <input type="text" ng-model="dish.predicate" > </p>
+				<ul class="media-list tab-pane fade in active">
+                <li class="media" ng-repeat="cmt in dish.comments | orderBy: dish.predicate">
+					
+					<blockquote>
+					<p>{{cmt.rating}} Stars</p>
+					  <p>{{cmt.comment}}</p>
+					  <footer>{{cmt.author}}, {{cmt.date | date:'MMM. dd, yyyy'}}</footer>
+					</blockquote>
+				</li>
+            </div>
+            <div class="col-xs-9 col-xs-offset-1" ng-controller="DishCommentController">
+                    <ul class="list-unstyled" ng-show="!commentForm.$invalid && !commentForm.$pristine">
+						<blockquote>
+							<p>{{newComment.rating}} Stars</p>
+							<p>{{newComment.comment}}</p>
+							<footer>{{newComment.author}}</footer>
+						</blockquote>
+                    </ul>
+                <form class="form-horizontal" name="commentForm"
+                		ng-submit="submitComment()" >
+		
+					 <div class="form-group" ng-class="{ 'has-error' : commentForm.yourname.$error.required && !commentForm.yourname.$pristine }">
+                        <label for="yourname"  class="col-xs-2 control-label">Your Name</label>
+                        <div class="col-xs-10">
+                        <input type="text" class="form-control" id="yourname" name="yourname" placeholder="Enter Your Name"
+                        ng-model="newComment.author" required>
+						<span ng-show="commentForm.yourname.$error.required && !commentForm.yourname.$pristine" class="help-block">Your name is required.</span>
+                        </div>
+                    </div>
+					<div class="form-group">
+						<label for="rating"  class="col-xs-2 control-label">Number of Stars</label>
+						<div class="col-xs-10">
+							<label class="radio-inline">
+								<input type="radio" id="rating1" name="rating" ng-model="newComment.rating" value="1" /> 1
+							</label > 
+							<label class="radio-inline">
+								<input type="radio"  id="rating2" name="rating" ng-model="newComment.rating" value="2" /> 2
+							</label > 
+							<label class="radio-inline">
+								<input type="radio"  id="rating3" name="rating" ng-model="newComment.rating" value="3" /> 3
+							</label> 
+							<label class="radio-inline">
+								<input type="radio"  id="rating4" name="rating" ng-model="newComment.rating" value="4" /> 4
+							</label> 
+							<label class="radio-inline">
+								<input type="radio"  id="rating5" name="rating" ng-model="newComment.rating" checked="checked"  value="5" /> 5
+							</label>
+						</div>
+					</div>
+					<div class="form-group" ng-class="{ 'has-error' : commentForm.yourcomments.$error.required && !commentForm.yourcomments.$pristine }">
+                        <label for="yourcomments"  class="col-xs-2 control-label">Your Comments</label>
+                        <div class="col-xs-10">
+							<textarea  rows="12" class="form-control" id="yourcomments" name="yourcomments" 
+							ng-model="newComment.comment" required ></textarea>
+							<span ng-show="commentForm.yourcomments.$error.required && !commentForm.yourcomments.$pristine" class="help-block">Your comments are required.</span>
+							<br/>
+								<button type="submit" class="btn btn-primary" ng-disabled="commentForm.$invalid">Submit Comment</button>
+							
+						</div>
+						
+                    </div>
+			
+					 
+					
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!-- build:js scripts/main.js -->
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="scripts/app.js"></script>
+<!-- endbuild -->
+
+</body>
+
+</html>

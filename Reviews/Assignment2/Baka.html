@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="confusionApp">
+
+<head>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head
+         content must come *after* these tags -->
+    <title>Ristorante Con Fusion: Menu</title>
+        <!-- Bootstrap -->
+<!-- build:css styles/main.css -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-social.css" rel="stylesheet">
+    <link href="styles/mystyles.css" rel="stylesheet">
+<!-- endbuild -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+        <div class="container" ng-controller="ContactController">
+
+        <div class="row row-content" ng-controller="DishCommentController">
+            <div class="col-xs-12" ng-controller="DishDetailController">
+                <ul class="media-list">
+                  <li class="media">
+                    
+                    <div class="media-left media-middle">
+                      <a href="#">
+                        <img class="media-object img-thumbnail" src="{{dish.image}}">
+                      </a>
+                    </div>
+                    <div class="media-body">
+                      <h2 class="media-hearing">{{dish.name}}
+                        <span class="label label-danger label-xs">{{dish.label}}</span>
+                        <span class="badge">{{dish.price | currency}}</span>
+                      </h2>
+                      <p>{{dish.description}}</p>
+                    </div>
+
+                    
+                      <br>
+                          <span style="font-weight: bold;font-size:16px">Customer Comments</span>
+                          <label style="color: gray;font-size:12px" for="sort">Sort by: </label><input id="sort" type="text" ng-model="query"></p>
+
+                          <blockquote ng-repeat="comment in dish.comments | orderBy:query">
+                              <p>{{comment.rating}} Stars</p>
+                              <p>{{comment.comment}}</p>
+                              <footer>{{comment.author}}, {{comment.date | date}}</footer>
+                          </blockquote>
+
+                  </li>
+                </ul>
+            </div>
+            
+                        <div class="col-xs-12 col-sm-9" ng-controller="FeedbackController">
+                          <blockquote ng-show="!feedback.firstname.$pristine && feedbackForm.$valid">
+                              <p>{{feedback.stars}} Stars</p>
+                              <footer>{{feedback.firstName}}</footer>
+                          </blockquote>
+                    <ul class="list-unstyled">
+						<p>Task 3: Here you include the code to show the live preview of the comment</p>
+						<p>The comment should be shown only when the form contains valid
+						information and is not pristine</p>
+                    </ul>
+                <form class="form-horizontal" name="feedbackForm"
+                		ng-submit="submitComment()" novalidate>
+					 <div class="form-group" >
+                        <label for="firstName" class="col-sm-2 control-label">First Name</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name" ng-model="feedback.firstName" required>
+
+                        </div>
+                    </div>
+					<div class="form-group" >
+            
+              <label for="" class="col-sm-2 control-label">Number of stars</label>
+              <div class="col-sm-10">
+                      <label>1
+                        <input type="radio" ng-model="feedback.stars" value="1">
+                      </label>
+                      <label>2
+                        <input type="radio" ng-model="feedback.stars" value="2">
+                      </label>
+                      <label>3
+                        <input type="radio" ng-model="feedback.stars" value="3">
+                      </label>
+                      <label>4
+                        <input type="radio" ng-model="feedback.stars" value="4">
+                      </label>
+                      <label>5
+                        <input type="radio" ng-model="feedback.stars" value="5">
+                      </label>
+                      </div>
+                      </div>
+                        <div class="form-group">
+                        <label for="feedback" class="col-sm-2 control-label">Your Feedback</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="12"
+                                ng-model="feedback.comment" required>
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                             <button type="submit" class="btn btn-primary" ng-disabled="feedbackForm.$invalid">Send Feedback</button>
+                        </div>
+                    </div>
+                  
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!-- build:js scripts/main.js -->
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="scripts/app.js"></script>
+<!-- endbuild -->
+
+</body>
+
+</html>
