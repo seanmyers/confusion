@@ -56,7 +56,7 @@ angular.module('confusionApp', ['ui.router'])
             })
 
             // route for the dishdetail page
-            .state('app.dishdetails', {
+            .state('app.dishdetail', {
                 url: 'menu/:id',
                 views: {
                     'content@': {

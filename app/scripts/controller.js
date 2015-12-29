@@ -5,10 +5,10 @@ angular.module('confusionApp')
         .controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
 
             $scope.tab = 1;
-            $scope.filtText = [];
+            $scope.filtText = '';
             $scope.showDetails = false;
 
-            $scope.dishes = {};
+            //$scope.dishes = [];
 
             menuFactory.getDishes()
             .then(
@@ -83,7 +83,6 @@ angular.module('confusionApp')
             .then(
                 function(response) {
                     $scope.dish = response.data;
-                    $scope.showDish = true;
                 }
             );
 
@@ -114,7 +113,6 @@ angular.module('confusionApp')
                 .then(
                     function(response) {
                         $scope.featuredish = response.data;
-                        $scope.showDish = true;
                     }
                 );
 
