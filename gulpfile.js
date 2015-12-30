@@ -28,11 +28,11 @@ gulp.task('clean', function() {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.start('usemin', 'imagemin','copyfonts', 'copyviews');
+    gulp.start('usemin', 'imagemin', 'copyfonts', 'copyviews');
 });
 
 gulp.task('usemin',['jshint'], function () {
-  return gulp.src('./app/index.html')
+  return gulp.src('./app/**/*.html')
       .pipe(usemin({
         css:[minifycss(),rev()],
         js: [ngannotate(),uglify(),rev()]
@@ -51,14 +51,14 @@ gulp.task('imagemin', function() {
 gulp.task('copyfonts', ['clean'], function() {
    return gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
    .pipe(gulp.dest('./dist/fonts'));
-   return gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
+   return gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,woff2,eof,svg}*')
    .pipe(gulp.dest('./dist/fonts'));
 });
 
 // Copyviews task
 gulp.task('copyviews', ['jshint'], function() {
 return gulp.src('./app/views/**/*.html')
-    .pipe(gulp.dest('./dist/views/'));
+    .pipe(gulp.dest('./dist/views'));
 });
 
 // Watch

@@ -1,0 +1,7 @@
+.DS_Store
+.git
+.jshintrc
+bower_components
+Reviews
+dist
+node_modules
