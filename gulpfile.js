@@ -51,15 +51,15 @@ gulp.task('imagemin', function() {
 
 gulp.task('copyfonts', ['clean'], function() {
     var fontawesome = gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
-   .pipe(gulp.dest('./dist/fonts'));
-   var boot =  gulp.src('./bower_components/bootstrap/fonts/**/*.{ttf,woff,woff2,eof,svg}*')
-   .pipe(gulp.dest('./dist/fonts'));
-   return merge(fontawesome, boot);
+    .pipe(gulp.dest('./dist/fonts'));
+    var boot =  gulp.src('./bower_components/bootstrap/fonts/**/*.{ttf,woff,woff2,eof,svg}*')
+    .pipe(gulp.dest('./dist/fonts'));
+    return merge(fontawesome, boot);
 });
 
 // Copyviews task
 gulp.task('copyviews', ['jshint'], function() {
-return gulp.src('./app/views/**/*.html')
+    return gulp.src('./app/views/**/*')
     .pipe(gulp.dest('./dist/views'));
 });
 
@@ -84,12 +84,14 @@ gulp.task('browser-sync', ['default'], function () {
 
    browserSync.init(files, {
        server: {
-           baseDir: "dist",
-           index: "index.html"
+         baseDir: "./dist",
+         index: "index.html"
        },
-        reloadDelay: 1000
+       reloadDelay: 1000
    });
+
+   gulp.task('default', ['browser-sync'], browserSync.reload);
         // Watch any files in dist/, reload on change
-  gulp.watch(['./dist/**']).on('change', browserSync.reload);
+   gulp.watch(['./dist/**']).on('change', browserSync.reload);
 
 });
