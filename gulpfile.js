@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    merge = require('merge-stream'),
     minifycss = require('gulp-minify-css'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
@@ -49,10 +50,11 @@ gulp.task('imagemin', function() {
 });
 
 gulp.task('copyfonts', ['clean'], function() {
-   return gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
+    var fontawesome = gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
    .pipe(gulp.dest('./dist/fonts'));
-   return gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,woff2,eof,svg}*')
+   var boot =  gulp.src('./bower_components/bootstrap/fonts/**/*.{ttf,woff,woff2,eof,svg}*')
    .pipe(gulp.dest('./dist/fonts'));
+   return merge(fontawesome, boot);
 });
 
 // Copyviews task
