@@ -45,9 +45,9 @@
                     <div class=media>
                         <blockquote ng-show="!commentForm.$invalid &&
                             !commentForm.$pristine">
-                            <p>{{userinput.rating}} Stars</p>
-                            <p>{{userinput.comment}}</p>
-                            <footer>{{userinput.author}}, {{userinput.date | date:'mediumDate'}}</footer>
+                            <p>{{myreview.rating}} Stars</p>
+                            <p>{{myreview.comment}}</p>
+                            <footer>{{myreview.author}}, {{myreview.date | date:'mediumDate'}}</footer>
                         </blockquote>
                     </div>
                 </ul>
@@ -61,7 +61,7 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="name"
                                 name="name" placeholder="Enter Your Name"
-                                ng-model="userinput.author" required>
+                                ng-model="myreview.author" required>
                                 <span ng-show="commentForm.name.$error.required
                                     && !commentForm.name.$pristine"
                                    class="help-block">Your name is required.</span>
@@ -73,15 +73,15 @@
                         <label for="stars" class="col-sm-2 control-label">Number of Stars</label>
                         <div class="col-sm-10">
                             <label class="radio-inline"><input type="radio" name="rating"
-                                ng-model="userinput.rating" ng-value="1">1</label>
+                                ng-model="myreview.rating" ng-value="1">1</label>
                             <label class="radio-inline"><input type="radio" name="rating"
-                                ng-model="userinput.rating" ng-value="2">2</label>
+                                ng-model="myreview.rating" ng-value="2">2</label>
                             <label class="radio-inline"><input type="radio" name="rating"
-                                ng-model="userinput.rating" ng-value="3">3</label>
+                                ng-model="myreview.rating" ng-value="3">3</label>
                             <label class="radio-inline"><input type="radio" name="rating"
-                                ng-model="userinput.rating" ng-value="4">4</label>
+                                ng-model="myreview.rating" ng-value="4">4</label>
                             <label class="radio-inline"><input type="radio" name="rating"
-                                ng-model="userinput.rating" ng-value="5">5</label>
+                                ng-model="myreview.rating" ng-value="5">5</label>
                         </div>
                     </div>
 
@@ -92,7 +92,7 @@
                         <label for="comments" class="col-sm-2 control-label">Your Comments</label>
                         <div class="col-sm-10">
                             <textarea class="form-control" id="comment" name="comment"
-                                rows="12" ng-model="userinput.comment" required>
+                                rows="12" ng-model="myreview.comment" required>
                             </textarea>
                             <span ng-show="commentForm.comment.$error.required
                                 && !commentForm.comment.$pristine"
