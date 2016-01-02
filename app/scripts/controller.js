@@ -135,7 +135,21 @@ angular.module('confusionApp')
                         }
                     );
 
-                $scope.promotion = menuFactory.getPromotion(0);
+                //render the promotion
+                $scope.promotion = menuFactory.getPromotion().get({id:0})
+                    .$promise.then (
+                        function(response) {
+                            $scope.promotion = response;
+                        },
+                        function(response) {
+                            $scope.message = "Error: " + response.status + " " + response.statusText;
+                        }
+                    );
+
+
+
+
+
                 $scope.leader = corporateFactory.getLeader(3);
             }
         ])
